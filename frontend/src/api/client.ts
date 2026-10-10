@@ -468,15 +468,66 @@ export const api = {
       return data;
     } catch {
       backendIsOnline = false;
+      const targetCase = inMemoryCases.find((c) => c.id === caseId) || inMemoryCases[0] || demoCase;
       return {
-        case: inMemoryCases[0] || demoCase,
-        summary: {
-          total_evidence: inMemoryEvidence.length,
-          total_events: inMemoryEvents.length,
-          total_findings: inMemoryFindings.length,
+        metadata: {
+          report_id: `REP-${targetCase.case_number}-${new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)}`,
+          generated_at: new Date().toISOString(),
+          system: 'TRACE-X Incident Reconstruction Platform v1.0',
+          disclaimer:
+            'This report provides technical forensic correlation based strictly on provided artifacts. Not courtroom-certified by default. Every finding must be verified independently by an investigator.',
         },
-        findings: inMemoryFindings,
-        evidence: inMemoryEvidence,
+        case: targetCase,
+        evidence_inventory: inMemoryEvidence.map((ev) => ({
+          id: ev.id,
+          original_filename: ev.original_filename,
+          media_type: ev.media_type,
+          size_bytes: ev.size_bytes,
+          sha256: ev.sha256,
+          processing_status: ev.processing_status,
+          verification_status: ev.verification_status,
+          last_verified_at: ev.last_verified_at || new Date().toISOString(),
+          uploaded_at: ev.uploaded_at,
+        })),
+        findings: inMemoryFindings.map((f) => ({
+          id: f.id,
+          finding_number: f.finding_number,
+          title: f.title,
+          description: f.description,
+          finding_type: f.finding_type,
+          derivation_method: f.derivation_method,
+          confidence: f.confidence,
+          confidence_explanation: f.confidence_explanation,
+          limitations: f.limitations,
+          review_status: f.review_status,
+          analyst_notes: f.analyst_notes,
+          reviewer_id: f.reviewer_id,
+          reviewed_at: f.reviewed_at,
+          supporting_evidence: (f.supporting_evidence_items || []).map((s) => ({
+            evidence_id: s.evidence_id,
+            filename: s.filename,
+            sha256: s.sha256,
+            support_type: s.support_type,
+            explanation: s.explanation,
+          })),
+        })),
+        timeline: inMemoryEvents.map((ev) => ({
+          id: ev.id,
+          event_type: ev.event_type,
+          category: ev.category,
+          severity: ev.severity,
+          description: ev.description,
+          observed_timestamp: ev.observed_timestamp || ev.normalized_timestamp_utc,
+          normalized_timestamp_utc: ev.normalized_timestamp_utc || 'UNCERTAIN',
+          timestamp_precision: ev.timestamp_precision,
+          timezone_provenance: ev.timezone_provenance,
+          source_evidence_id: ev.evidence_id,
+        })),
+        relationships_summary: {
+          total_relationships: inMemoryGraph.edges.length,
+          items: inMemoryGraph.edges,
+        },
+        audit_trail: inMemoryAuditLogs,
       };
     }
   },
