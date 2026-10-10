@@ -9,7 +9,8 @@ import type {
   OverviewStats,
 } from '../types';
 
-const API_BASE = '/api/v1';
+const BACKEND_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+const API_BASE = `${BACKEND_URL}/api/v1`;
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {
@@ -30,7 +31,7 @@ async function handleResponse<T>(res: Response): Promise<T> {
 export const api = {
   // Health
   async getHealth() {
-    const res = await fetch('/health');
+    const res = await fetch(`${BACKEND_URL || ''}/health`);
     return handleResponse<any>(res);
   },
 

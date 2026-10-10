@@ -55,3 +55,32 @@ def health_check(db: Session = Depends(get_db)):
 
 # Mount v1 API
 app.include_router(api_router, prefix=settings.API_V1_PREFIX)
+
+# Serve built frontend in unified deployment mode if frontend/dist exists
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+frontend_dist = None
+candidate_paths = [
+    Path(__file__).resolve().parent.parent.parent / "frontend" / "dist",
+    Path(__file__).resolve().parent.parent / "dist",
+    Path("/app/frontend/dist"),
+]
+for p in candidate_paths:
+    if p.exists() and (p / "index.html").exists():
+        frontend_dist = p
+        break
+
+if frontend_dist:
+    assets_dir = frontend_dist / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="frontend-assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str):
+        target = frontend_dist / full_path
+        if full_path and target.is_file():
+            return FileResponse(target)
+        return FileResponse(frontend_dist / "index.html")
+
