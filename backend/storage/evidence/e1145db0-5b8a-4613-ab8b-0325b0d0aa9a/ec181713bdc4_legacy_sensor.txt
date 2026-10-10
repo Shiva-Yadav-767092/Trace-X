@@ -1,0 +1,2 @@
+[UNKNOWN_TIMESTAMP] Legacy OT network sensor detected syn-scan activity targeting port 443 on internal subnet 10.0.4.0/24
+[MISSING_CLOCK_SYNC] Heartbeat packet dropped from collector node Alpha-7 due to uncalibrated RTC oscillator

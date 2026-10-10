@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #111116;
+    --bg-secondary: #17171D;
+    --bg-panel: #202028;
+    --border-color: #343440;
+    --accent-primary: #A78BFA;
+    --accent-hover: #C4B5FD;
+    --text-primary: #F3F4F6;
+    --text-secondary: #A1A1AA;
+    --info: #67E8F9;
+    --warning: #FBBF24;
+    --critical: #F87171;
+    --success: #34D399;
+  }
+
+  body {
+    background-color: #111116;
+    color: #F3F4F6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #111116;
+  }
+}
+
+/* Custom scrollbars for dark cybersecurity UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #17171D;
+}
+::-webkit-scrollbar-thumb {
+  background: #343440;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A78BFA;
+}

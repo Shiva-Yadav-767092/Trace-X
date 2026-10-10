@@ -1,0 +1,45 @@
+{
+  "scenario": "Operation PhishTrace",
+  "case_number": "CASE-2026-9042",
+  "expected_evidence_count": 6,
+  "expected_entities_count": 8,
+  "expected_relationships_minimum": 12,
+  "expected_findings": [
+    {
+      "finding_number": "FIND-001",
+      "title": "Suspicious Inbound Phishing Email with Credential Harvesting URL",
+      "type": "INITIAL_ACCESS",
+      "derivation_method": "DETERMINISTIC_RULE",
+      "confidence": 0.92,
+      "primary_artifact": "phishing_email.eml",
+      "key_observable": "login-portal.auth-token-verify.net"
+    },
+    {
+      "finding_number": "FIND-002",
+      "title": "Authentication Anomaly & Credential Verification Attempts for 'jdoe'",
+      "type": "CREDENTIAL_COMPROMISE",
+      "derivation_method": "MULTI_ARTIFACT_PIVOT",
+      "confidence": 0.85,
+      "primary_artifact": "auth_service.log",
+      "key_observable": "198.51.100.45"
+    },
+    {
+      "finding_number": "FIND-003",
+      "title": "Suspicious Host Execution and Cryptographic Hash Artifact",
+      "type": "EXECUTION",
+      "derivation_method": "DETERMINISTIC_RULE",
+      "confidence": 0.88,
+      "primary_artifact": "endpoint_activity.json",
+      "key_observable": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "finding_number": "FIND-004",
+      "title": "Telemetry Integrity Alert: Sensor Clock Skew or Missing Timestamps",
+      "type": "ANOMALY",
+      "derivation_method": "DETERMINISTIC_RULE",
+      "confidence": 0.95,
+      "primary_artifact": "legacy_sensor.txt",
+      "uncertainty_flag": true
+    }
+  ]
+}

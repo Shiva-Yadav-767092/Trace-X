@@ -1,0 +1,18 @@
+From: IT Security Notice <security-update@mail-verify-gateway.internal>
+To: John Doe <jdoe@corp-acme.internal>
+Subject: CRITICAL: Immediate Password Expiration & Multi-Factor Verification Required
+Date: Thu, 09 Oct 2026 14:15:20 +0000
+Message-ID: <msg-20261009-141520-9042@mail-verify-gateway.internal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+Dear Employee,
+
+Your Acme Corp Single Sign-On session certificate has expired. To maintain continuous access to enterprise resources and prevent account lock-out, you must authenticate through the secondary verification gateway immediately:
+
+http://login-portal.auth-token-verify.net/reset?user=jdoe
+
+Failure to confirm within 30 minutes will terminate active corporate VPN sessions.
+
+Corporate Security Operations
+Acme Enterprise Security Infrastructure
