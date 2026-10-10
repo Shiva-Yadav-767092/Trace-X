@@ -9,6 +9,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  build: {
+    assetsDir: 'app-assets',
+  },
   server: {
     port: 5173,
     proxy: {
