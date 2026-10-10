@@ -76,11 +76,18 @@ if frontend_dist:
     assets_dir = frontend_dist / "assets"
     if assets_dir.exists():
         app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="frontend-assets")
+        app.mount("/Trace-X/assets", StaticFiles(directory=str(assets_dir)), name="frontend-assets-gh")
 
     @app.get("/{full_path:path}", include_in_schema=False)
     async def serve_spa(full_path: str):
-        target = frontend_dist / full_path
-        if full_path and target.is_file():
+        clean_path = full_path
+        if clean_path.startswith("Trace-X/"):
+            clean_path = clean_path[len("Trace-X/"):]
+        elif clean_path == "Trace-X":
+            clean_path = ""
+
+        target = frontend_dist / clean_path
+        if clean_path and target.is_file():
             return FileResponse(target)
         return FileResponse(frontend_dist / "index.html")
 
